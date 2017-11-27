@@ -21,15 +21,15 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Menu de Usuário <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Menu<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         {{# if login }}
-                            <li><a href="/user/profile">Perfil de Usuário</a></li>
+                            <li><a href="/user/profile">Profile</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="/user/logout">Sair</a></li>
+                            <li><a href="/user/logout">Logout</a></li>
                         {{ else }}
-                            <li><a href="/user/signup">Criar Conta</a></li>
-                            <li><a href="/user/signin">Entrar</a></li>
+                            <li><a href="/user/signup">Signup</a></li>
+                            <li><a href="/user/signin">Signin</a></li>
                         {{/if}}
 
                     </ul>
