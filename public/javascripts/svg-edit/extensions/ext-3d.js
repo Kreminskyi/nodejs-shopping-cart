@@ -37,7 +37,7 @@ svgEditor.addExtension('star', function(S){'use strict';
 
 			var container, stats;
 
-			var camera, scene, objects;
+			var camera, controls, scene, objects;
 			var particleLight;
 			var dae;
 	
@@ -77,7 +77,13 @@ svgEditor.addExtension('star', function(S){'use strict';
 				//dialog.appendChild( container );
 
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-				camera.position.set( 2, 2, 3 );
+				camera.position.set( 8, 12, 13 );
+
+                controls = new THREE.OrbitControls( camera );
+                controls.enablePan = false;
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.07;
+                controls.rotateSpeed = 0.2;
 
 				scene = new THREE.Scene();
 
@@ -186,11 +192,12 @@ svgEditor.addExtension('star', function(S){'use strict';
 
 				var timer = Date.now() * 0.0001;
 
-				camera.position.x = Math.cos( timer ) * 10;
+				/*camera.position.x = Math.cos( timer ) * 10;
 				camera.position.y = 2;
-				camera.position.z = Math.sin( timer ) * 10;
+				camera.position.z = Math.sin( timer ) * 10;*/
 
 				camera.lookAt( scene.position );
+				controls.update();
 
 				particleLight.position.x = Math.sin( timer * 4 ) * 3009;
 				particleLight.position.y = Math.cos( timer * 5 ) * 4000;
