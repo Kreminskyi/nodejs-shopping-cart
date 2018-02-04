@@ -989,6 +989,10 @@ span.zoom_tool {
 	height: 320px;
 }
 
+#svgWhiteBg {
+	display: none;
+}
+
 canvas {
 	border: 1px solid black;
 	box-sizing: border-box;

@@ -107,22 +107,22 @@ svgEditor.addExtension('star', function(S){'use strict';
 				scene.add( dae );
 				scene.background = new THREE.Color( 0xffffff );
 
-				particleLight = new THREE.Mesh( new THREE.SphereGeometry( 4, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffffff } ) );
-				scene.add( particleLight );
+				//particleLight = new THREE.Mesh( new THREE.SphereGeometry( 4, 8, 8 ), new THREE.MeshBasicMaterial( { color: 0xffffff } ) );
+				//scene.add( particleLight );
 
 				// Lights
 
-				scene.add( new THREE.AmbientLight( 0xcccccc ) );
+				scene.add( new THREE.AmbientLight( 0xafafaf ) );
 
-				var directionalLight = new THREE.DirectionalLight(/*Math.random() * 0xffffff*/0xeeeeee );
-				directionalLight.position.x = Math.random() - 0.5;
-				directionalLight.position.y = Math.random() - 0.5;
-				directionalLight.position.z = Math.random() - 0.5;
+				var directionalLight = new THREE.DirectionalLight(/*Math.random() * 0xffffff*/0x666666 );
+				directionalLight.position.x = 10;
+				directionalLight.position.y = 10;
+				directionalLight.position.z = 10;
 				directionalLight.position.normalize();
 				scene.add( directionalLight );
 
-				var pointLight = new THREE.PointLight( 0xffffff, 4 );
-				particleLight.add( pointLight );
+				//var pointLight = new THREE.PointLight( 0xffffff, 4 );
+				//particleLight.add( pointLight );
 
 				renderer = new THREE.WebGLRenderer({canvas: document.getElementById('ext3DCanv')});
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -211,9 +211,9 @@ svgEditor.addExtension('star', function(S){'use strict';
 				camera.lookAt( scene.position );
 				controls.update();
 
-				particleLight.position.x = Math.sin( timer * 4 ) * 3009;
-				particleLight.position.y = Math.cos( timer * 5 ) * 4000;
-				particleLight.position.z = Math.cos( timer * 4 ) * 3009;
+				//particleLight.position.x = Math.sin( timer * 4 ) * 3009;
+				//particleLight.position.y = Math.cos( timer * 5 ) * 4000;
+				//particleLight.position.z = Math.cos( timer * 4 ) * 3009;
 
 				THREE.AnimationHandler.update( clock.getDelta() );
 
