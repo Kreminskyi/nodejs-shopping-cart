@@ -88,6 +88,7 @@ svgEditor.addExtension('star', function(S){'use strict';
 
 
 				camera.position.set( 8, 12, 13 );
+				camera.lookAt(0, 0, 0);
 
                 controls = new THREE.OrbitControls( camera );
                 controls.enablePan = false;
@@ -187,8 +188,6 @@ svgEditor.addExtension('star', function(S){'use strict';
 
 				document.getElementById('can').addEventListener('mousedown', updateTexture);
 
-
-
 				//dae.children["0"].children["0"].children["0"].material.materials["0"].map.needsUpdate = true;
 				//dae.children["0"].children["0"].children["0"].material.materials["0"].needsUpdate = true;
 
@@ -218,20 +217,20 @@ svgEditor.addExtension('star', function(S){'use strict';
 
 			function render() {
 
-				var timer = Date.now() * 0.0001;
+				//var timer = Date.now() * 0.0001;
 
 				/*camera.position.x = Math.cos( timer ) * 10;
 				camera.position.y = 2;
 				camera.position.z = Math.sin( timer ) * 10;*/
 
-				camera.lookAt( scene.position );
+				//camera.lookAt( scene.position );
 				controls.update();
 
 				//particleLight.position.x = Math.sin( timer * 4 ) * 3009;
 				//particleLight.position.y = Math.cos( timer * 5 ) * 4000;
 				//particleLight.position.z = Math.cos( timer * 4 ) * 3009;
 
-				THREE.AnimationHandler.update( clock.getDelta() );
+				//THREE.AnimationHandler.update( clock.getDelta() );
 
 				renderer.render( scene, camera );
 
