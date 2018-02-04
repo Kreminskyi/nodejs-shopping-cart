@@ -17,7 +17,9 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	this.object = object;
 
-	this.domElement = ( domElement !== undefined ) ? domElement : document;
+	//this.domElement = ( domElement !== undefined ) ? domElement : document;
+
+	this.domElement = document.getElementById('ext3DCanv');
 
 	// Set to false to disable this control
 	this.enabled = true;
@@ -73,8 +75,8 @@ THREE.OrbitControls = function ( object, domElement ) {
 	this.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
 
 	// Mouse buttons
-	//this.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
-	this.mouseButtons = { ORBIT: THREE.MOUSE.RIGHT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
+	this.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
+	//this.mouseButtons = { ORBIT: THREE.MOUSE.RIGHT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
 
 	// for reset
 	this.target0 = this.target.clone();
@@ -736,7 +738,6 @@ THREE.OrbitControls = function ( object, domElement ) {
 	}
 
 	function onMouseWheel( event ) {
-
 		if ( scope.enabled === false || scope.enableZoom === false || ( state !== STATE.NONE && state !== STATE.ROTATE ) ) return;
 
 		event.preventDefault();

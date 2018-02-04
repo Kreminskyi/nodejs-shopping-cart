@@ -32,7 +32,9 @@ svgEditor.addExtension('star', function(S){'use strict';
 	function show3DPanel(){
 				
 		if (typeof renderer === 'undefined'){
-			$('#info').draggable();
+			$('#can').draggable({handle: '.windowTop'});
+			//$('#info').style.left = "892px";
+			//$('#info').style.top = "65px";
 		if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 			var container, stats;
@@ -83,13 +85,24 @@ svgEditor.addExtension('star', function(S){'use strict';
                 controls.enablePan = false;
                 controls.enableDamping = true;
                 controls.dampingFactor = 0.07;
-                controls.rotateSpeed = 0.2;
+                controls.rotateSpeed = 0.07;
 
 				scene = new THREE.Scene();
 
 				// Grid
 
 				// Add the COLLADA
+
+                var setMaterial = function(node, material) {
+                    node.material = material;
+                    if (node.children) {
+                        for (var i = 0; i < node.children.length; i++) {
+                            setMaterial(node.children[i], material);
+                        }
+                    }
+                };
+
+                //setMaterial(dae, new THREE.MeshStandardMaterial({color: 0xffffff}));
 
 				scene.add( dae );
 				scene.background = new THREE.Color( 0xffffff );
@@ -111,7 +124,7 @@ svgEditor.addExtension('star', function(S){'use strict';
 				var pointLight = new THREE.PointLight( 0xffffff, 4 );
 				particleLight.add( pointLight );
 
-				renderer = new THREE.WebGLRenderer();
+				renderer = new THREE.WebGLRenderer({canvas: document.getElementById('ext3DCanv')});
 				renderer.setPixelRatio( window.devicePixelRatio );
 				//renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.setSize(300, 300);
@@ -125,44 +138,43 @@ svgEditor.addExtension('star', function(S){'use strict';
 				//window.addEventListener( 'resize', onWindowResize, false );
 				container.onmousedown=function(){
 					
-				function loadTextureImage (texture) {
-					var dataURL;
-					var Utils = svgedit.utilities;
-					//console.log($('#export_canvas')[0]);			
-					var c3d,data3d;
-					data3d=svgCanvas.svgCanvasToString();
-					if(!$('#export_canvas').length) {
-					$('<canvas>', {id: 'export_canvas'}).hide().appendTo('body');
-				}
-				c3d = $('#export_canvas')[0];
-				c3d.width = svgCanvas.contentW;
-				c3d.height = svgCanvas.contentH;
-				Utils.buildCanvgCallback(function () {
-					canvg(c3d, data3d, {renderCallback: function() {				
-     						}});
-							})();
-					     //if (!customExportImage) {
-						//	openExportWindow();
-						//}
-						//var quality = parseInt($('#image-slider').val(), 10)/100;
-						//svgCanvas.rasterExport('PNG', 50, exportWindowName);
-					 //var myCanvas = $(document).find('#svgcanvas');
-					//var dataURL = new Image();
-					dataURL = ($('#export_canvas')[0]).toDataURL();
-                         //url = url + '?' + Math.random();
-		                 var loader = new THREE.ImageLoader();
-		                 loader.load( dataURL, function ( image ) {
-			         texture.image = image;
-			         texture.needsUpdate = true;
+					function loadTextureImage (texture) {
+						var dataURL;
+						var Utils = svgedit.utilities;
+						//console.log($('#export_canvas')[0]);
+						var c3d,data3d;
+						data3d=svgCanvas.svgCanvasToString();
+						if(!$('#export_canvas').length) {
+							$('<canvas>', {id: 'export_canvas'}).hide().appendTo('body');
+						}
+						c3d = $('#export_canvas')[0];
+						c3d.width = svgCanvas.contentW;
+						c3d.height = svgCanvas.contentH;
 
-		} );
+						Utils.buildCanvgCallback(function () {
+							canvg(c3d, data3d, {renderCallback: function() {
+									}});
+									})();
+								 //if (!customExportImage) {
+								//	openExportWindow();
+								//}
+								//var quality = parseInt($('#image-slider').val(), 10)/100;
+								//svgCanvas.rasterExport('PNG', 50, exportWindowName);
+							 //var myCanvas = $(document).find('#svgcanvas');
+							//var dataURL = new Image();
+							dataURL = ($('#export_canvas')[0]).toDataURL();
+							 //url = url + '?' + Math.random();
+							 var loader = new THREE.ImageLoader();
+							 loader.load( dataURL, function ( image ) {
+								 texture.image = image;
+								 texture.needsUpdate = true;
+							} );
+					}
 
-	}
-	
-				loadTextureImage(dae.children["0"].children["0"].children["0"].material.materials["0"].map);
+					loadTextureImage(dae.children["0"].children["0"].children["0"].material.materials["0"].map);
 					//dae.children["0"].children["0"].children["0"].material.materials["0"].map.needsUpdate = true;
 					//dae.children["0"].children["0"].children["0"].material.materials["0"].needsUpdate = true;
-    }
+				}
 
 			}
 
@@ -226,7 +238,7 @@ svgEditor.addExtension('star', function(S){'use strict';
 			events: {
 				click: function(){
 					show3DPanel();
-					}
+				}
 			}
 		}]
 

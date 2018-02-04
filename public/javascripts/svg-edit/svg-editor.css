@@ -974,6 +974,26 @@ span.zoom_tool {
 	overflow: visible;
 }
 
+.windowTop {
+	background-color: lightslategrey;
+	width: 300px;
+	height: 20px;
+	box-sizing: border-box;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+#can {
+	width: 300px;
+	height: 320px;
+}
+
+canvas {
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+
 @media screen and (max-width:1250px) {
 	.expanded #palette_holder {
 		left: 560px;
