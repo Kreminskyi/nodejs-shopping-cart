@@ -78,7 +78,15 @@ svgEditor.addExtension('star', function(S){'use strict';
 				//dialog=document.getElementById('info');
 				//dialog.appendChild( container );
 
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+                var width = 300;
+                var height = 300;
+
+				camera = new THREE.PerspectiveCamera( 45, width / height, 1, 2000 );
+
+                //camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, 1, 1000);
+
+
+
 				camera.position.set( 8, 12, 13 );
 
                 controls = new THREE.OrbitControls( camera );
@@ -127,7 +135,7 @@ svgEditor.addExtension('star', function(S){'use strict';
 				renderer = new THREE.WebGLRenderer({canvas: document.getElementById('ext3DCanv')});
 				renderer.setPixelRatio( window.devicePixelRatio );
 				//renderer.setSize( window.innerWidth, window.innerHeight );
-				renderer.setSize(300, 300);
+				renderer.setSize(width, height);
 				container.appendChild( renderer.domElement );
 
 				//stats = new Stats();
@@ -136,45 +144,53 @@ svgEditor.addExtension('star', function(S){'use strict';
 				//
 
 				//window.addEventListener( 'resize', onWindowResize, false );
-				container.onmousedown=function(){
 					
-					function loadTextureImage (texture) {
-						var dataURL;
-						var Utils = svgedit.utilities;
-						//console.log($('#export_canvas')[0]);
-						var c3d,data3d;
-						data3d=svgCanvas.svgCanvasToString();
-						if(!$('#export_canvas').length) {
-							$('<canvas>', {id: 'export_canvas'}).hide().appendTo('body');
-						}
-						c3d = $('#export_canvas')[0];
-						c3d.width = svgCanvas.contentW;
-						c3d.height = svgCanvas.contentH;
-
-						Utils.buildCanvgCallback(function () {
-							canvg(c3d, data3d, {renderCallback: function() {
-									}});
-									})();
-								 //if (!customExportImage) {
-								//	openExportWindow();
-								//}
-								//var quality = parseInt($('#image-slider').val(), 10)/100;
-								//svgCanvas.rasterExport('PNG', 50, exportWindowName);
-							 //var myCanvas = $(document).find('#svgcanvas');
-							//var dataURL = new Image();
-							dataURL = ($('#export_canvas')[0]).toDataURL();
-							 //url = url + '?' + Math.random();
-							 var loader = new THREE.ImageLoader();
-							 loader.load( dataURL, function ( image ) {
-								 texture.image = image;
-								 texture.needsUpdate = true;
-							} );
+				function loadTextureImage (texture) {
+					if (container == null) {
+						return;
 					}
+					var dataURL;
+					var Utils = svgedit.utilities;
+					//console.log($('#export_canvas')[0]);
+					var c3d,data3d;
+					data3d=svgCanvas.svgCanvasToString();
+					if(!$('#export_canvas').length) {
+						$('<canvas>', {id: 'export_canvas'}).hide().appendTo('body');
+					}
+					c3d = $('#export_canvas')[0];
+					c3d.width = svgCanvas.contentW;
+					c3d.height = svgCanvas.contentH;
 
-					loadTextureImage(dae.children["0"].children["0"].children["0"].material.materials["0"].map);
-					//dae.children["0"].children["0"].children["0"].material.materials["0"].map.needsUpdate = true;
-					//dae.children["0"].children["0"].children["0"].material.materials["0"].needsUpdate = true;
+					Utils.buildCanvgCallback(function () {
+						canvg(c3d, data3d, {renderCallback: function() {
+								}});
+								})();
+							 //if (!customExportImage) {
+							//	openExportWindow();
+							//}
+							//var quality = parseInt($('#image-slider').val(), 10)/100;
+							//svgCanvas.rasterExport('PNG', 50, exportWindowName);
+						 //var myCanvas = $(document).find('#svgcanvas');
+						//var dataURL = new Image();
+						dataURL = ($('#export_canvas')[0]).toDataURL();
+						 //url = url + '?' + Math.random();
+						 var loader = new THREE.ImageLoader();
+						 loader.load( dataURL, function ( image ) {
+							 texture.image = image;
+							 texture.needsUpdate = true;
+						} );
 				}
+
+				function updateTexture() {
+                    loadTextureImage(dae.children["0"].children["0"].children["0"].material.materials["0"].map);
+				}
+
+				document.getElementById('can').addEventListener('mousedown', updateTexture);
+
+
+
+				//dae.children["0"].children["0"].children["0"].material.materials["0"].map.needsUpdate = true;
+				//dae.children["0"].children["0"].children["0"].material.materials["0"].needsUpdate = true;
 
 			}
 
@@ -219,7 +235,7 @@ svgEditor.addExtension('star', function(S){'use strict';
 
 				renderer.render( scene, camera );
 
-			};	
+			};
 		
 		
 		
