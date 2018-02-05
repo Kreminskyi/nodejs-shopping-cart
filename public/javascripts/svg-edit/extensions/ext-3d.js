@@ -191,7 +191,14 @@ svgEditor.addExtension('star', function(S){'use strict';
                     loadTextureImage(dae.children["0"].children["0"].children["0"].material.materials["0"].map);
 				}
 
-				document.getElementById('can').addEventListener('mousedown', updateTexture);
+				//document.getElementById('can').addEventListener('mousedown', updateTexture);
+				document.getElementById('workarea').addEventListener('mouseup', updateTexture);
+
+				/** TODO: this is a pretty ugly workaround for the first update, but it works... */
+				updateTexture();
+				setTimeout(function() {
+					updateTexture();
+				}, 1500);
 
 
 
