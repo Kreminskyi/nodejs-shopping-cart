@@ -54,7 +54,7 @@ svgEditor.setConfig({
 // EXTENSION CONFIG
 svgEditor.setConfig({
 	extensions: [
-		'ext-overview_window.js', 'ext-markers.js', 'ext-connector.js', 'ext-eyedropper.js', 'ext-shapes.js', 'ext-imagelib.js', 'ext-grid.js', 'ext-polygon.js','ext-panning.js','ext-3dserver_opensave.js','ext-3d.js'
+		'ext-overview_window.js', 'ext-markers.js', 'ext-connector.js', 'ext-eyedropper.js', 'ext-shapes.js', 'ext-imagelib.js', 'ext-grid.js', 'ext-polygon.js','ext-dropbox.js','ext-3dserver_opensave.js','ext-3d.js'
 	]
 	 , noDefaultExtensions: true, // noDefaultExtensions can only be meaningfully used in config.js or in the URL
 });
